@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <main>
-    <div>A general presentation of the tool.</div>
-  </main>
+  <div class="p-16">
+    <p>Welcome to SciGate.</p>
+  </div>
 </template>
