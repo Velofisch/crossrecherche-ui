@@ -7,7 +7,9 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/"><img alt="Sci-Gate Logo" class="logo" src="@/assets/logo.svg" width="180" height="100" /></RouterLink>
     </header>
 
-  <RouterView />
+    <main class="grow">
+      <RouterView />
+    </main>
 </template>
 
 <style>
