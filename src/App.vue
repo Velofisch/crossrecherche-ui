@@ -12,6 +12,14 @@ import { RouterLink, RouterView } from 'vue-router'
     <main class="grow">
       <RouterView />
     </main>
+    <footer class="bg-gray-100 p-16 grow-0 flex flex-row justify-between">
+      <span class="text-gray-700 text-sm font-medium uppercase">© 2022 | Crossrecherche</span>
+      <div>
+        <RouterLink to="/" class="text-gray-700 text-sm font-medium uppercase">Home</RouterLink> |
+        <RouterLink to="/search" class="text-gray-700 text-sm font-medium uppercase">Search</RouterLink> |
+        <RouterLink to="/about" class="text-gray-700 text-sm font-medium uppercase">About</RouterLink>
+      </div>
+    </footer>
   </div>
 </template>
 
