@@ -36,7 +36,7 @@ import { } from "@/components/SearchBar.vue"
 import { createApp } from 'vue'
 
 var searchterm='';
-const proxyurl='http://localhost:8080/';
+const proxyurl='http://v2202109132150164038.luckysrv.de:8080/';
 var searchEngines= ref([
         { id: "entscheidsuche", name: "Entscheidsuche", defaultCheckedState: true, checked: true, hitlist: [], hits: 0 },
         { id: "swisscovery", name: "Swisscovery", defaultCheckedState: true, checked: true, hitlist: [], hits: 0 },
