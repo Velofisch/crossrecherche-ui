@@ -34,6 +34,20 @@ import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import { } from "@/components/SearchBar.vue"
 import { createApp } from 'vue'
+import { createI18n } from 'vue-i18n'
+import SearchResultsView from '@/Views/SearchResultsView.vue'
+
+const i18n = createI18n({
+  // something vue-i18n options here ...
+})
+
+const app = createApp({
+  // something vue options here ...
+})
+
+app.use(i18n)
+app.mount('#app')
+
 
 var searchterm='';
 const proxyurl='http://v2202109132150164038.luckysrv.de:8080/';
@@ -44,7 +58,6 @@ var searchEngines= ref([
         { id: "boris", name: "Boris", defaultCheckedState: true, checked: true, hitlist: [],  hits: 0 }
       ]);
 
-const app=createApp({})
 
 function onQueryChange (query) {
       this.searchterm = query;
