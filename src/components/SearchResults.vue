@@ -12,8 +12,8 @@ import { ref } from 'vue'
 </script>
 
 <template>
-    <h2 class="text-2xl font-medium">Search results</h2>
+    <h2 class="text-2xl font-medium">{{ ("Trefferliste")}}</h2>
     <div v-for="(result, index) in results" :key="id + index" class="my-4">
-        <SearchResult :description="result.description" :url="result.url"/>
+        <SearchResult :description="result.description" :url="result.url"></SearchResult>
     </div>
 </template>

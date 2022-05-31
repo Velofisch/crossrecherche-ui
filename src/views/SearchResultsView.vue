@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import { defineProps } from 'vue'
 var props=defineProps({
 	searchterm: { type: String},
 	searchEngines: { type: Array},
@@ -17,14 +16,14 @@ function selectTab(searchEngineId) {
 
 <template>
     <div class="tabs grid grid-rows-1 grid-flow-col">
-        <div v-for="searchEngine in this.searchEngines.filter(function(u) { return u.checked})" :key="'tab-' + searchEngine.id" :class="['tab', {'active': selectedTab === searchEngine.id}]">
+        <div v-for="searchEngine in searchEngines.filter(function(u) { return u.checked})" :key="'tab-' + searchEngine.id" :class="['tab', {'active': selectedTab === searchEngine.id}]">
             <a v-if="searchEngine.hits>0" class="text-white text-base font-medium uppercase hover:cursor-pointer" @click="selectTab(searchEngine.id)">{{ searchEngine.name }} ({{ searchEngine.hits}})</a>
             <a v-else class="text-white text-base font-medium uppercase hover:cursor-pointer" @click="selectTab(searchEngine.id)">{{ searchEngine.name }}</a>
         </div>
     </div>
     <div class="p-8">
-        <TabContent v-for="searchEngine in this.searchEngines.filter(function(u) { return u.checked})" :key="'tab-content-' + searchEngine.id" :selected="selectedTab === searchEngine.id" :class="[{'active': selectedTab === searchEngine.id}]">
-            <SearchResults v-if="searchEngine.hits>0" :id="searchEngine.id" :results="searchEngine.hitlist"/>
+        <TabContent v-for="searchEngine in searchEngines.filter(function(u) { return u.checked})" :key="'tab-content-' + searchEngine.id" :selected="selectedTab === searchEngine.id" :class="[{'active': selectedTab === searchEngine.id}]">
+            <SearchResults v-if="searchEngine.hits>0" :id="searchEngine.id" :results="searchEngine.hitlist"></SearchResults>
         </TabContent>
     </div>
 </template>

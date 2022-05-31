@@ -3,11 +3,11 @@
   <div class="h-full flex flex-col justify-between border-2 border-gray-500 bg-white">
     <header class="bg-gray-100 p-16 flex items-start space-x-16 grow-0 text-gray-600">
       <RouterLink to="/"><img alt="Sci-Gate Logo" class="logo" src="@/assets/logo.svg" width="180" height="100" /></RouterLink>
-      <SearchBar :searchterm="searchterm" :searchEngines="searchEngines" @clicked="onSearch"/>
+      <SearchBar :searchterm="searchterm" :searchEngines="searchEngines" @clicked="onSearch"></SearchBar>
     </header>
 
     <main class="grow">
-      <RouterView :searchterm="searchterm" :searchEngines="searchEngines"/>
+      <RouterView :searchterm="searchterm" :searchEngines="searchEngines"></RouterView>
     </main>
     <footer class="bg-gray-100 p-16 grow-0 flex flex-row justify-between">
       <span class="text-gray-700 text-sm font-medium uppercase">A running prototype</span>
@@ -32,25 +32,27 @@ body {
 <script setup>
 import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import { } from "@/components/SearchBar.vue"
+import SearchBar from "@/components/SearchBar.vue"
 import { createApp } from 'vue'
-import { createI18n } from 'vue-i18n'
-import SearchResultsView from '@/Views/SearchResultsView.vue'
+// import { createI18n } from 'vue-i18n'
+import SearchResultsView from '@/views/SearchResultsView.vue'
+import router from '@/router'
 
-const i18n = createI18n({
+
+// const i18n = createI18n({
   // something vue-i18n options here ...
-})
+// })
 
 const app = createApp({
   // something vue options here ...
 })
 
-app.use(i18n)
-app.mount('#app')
+// app.use(i18n);
 
 
 var searchterm='';
 const proxyurl='http://v2202109132150164038.luckysrv.de:8080/';
+
 var searchEngines= ref([
         { id: "entscheidsuche", name: "Entscheidsuche", defaultCheckedState: true, checked: true, hitlist: [], hits: 0 },
         { id: "swisscovery", name: "Swisscovery", defaultCheckedState: true, checked: true, hitlist: [], hits: 0 },
@@ -59,9 +61,6 @@ var searchEngines= ref([
       ]);
 
 
-function onQueryChange (query) {
-      this.searchterm = query;
-    }
     
 function process_hits(data,se){
 	// Sending and receiving data in JSON format using POST method
@@ -105,6 +104,7 @@ function process_hitlists(data,se){
     }
     
 function onSearch (sb) {
+      router.push({ path: '/search' });
       if (sb !== '') {
         for (const s of searchEngines.value){
           if(document.getElementById(s.id).checked){
