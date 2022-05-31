@@ -22,3 +22,4 @@ app.component('SearchBar', SearchBar)
     .component('TabContent', TabContent)
 
 app.mount('#app')
+

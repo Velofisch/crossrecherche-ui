@@ -1,19 +1,16 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
 
 <template>
   <div class="h-full flex flex-col justify-between border-2 border-gray-500 bg-white">
     <header class="bg-gray-100 p-16 flex items-start space-x-16 grow-0 text-gray-600">
       <RouterLink to="/"><img alt="Sci-Gate Logo" class="logo" src="@/assets/logo.svg" width="180" height="100" /></RouterLink>
-      <SearchBar />
+      <SearchBar :searchterm="searchterm" :searchEngines="searchEngines" @clicked="onSearch"/>
     </header>
 
     <main class="grow">
-      <RouterView />
+      <RouterView :searchterm="searchterm" :searchEngines="searchEngines"/>
     </main>
     <footer class="bg-gray-100 p-16 grow-0 flex flex-row justify-between">
-      <span class="text-gray-700 text-sm font-medium uppercase">© 2022 | Crossrecherche</span>
+      <span class="text-gray-700 text-sm font-medium uppercase">A running prototype</span>
       <div>
         <RouterLink to="/" class="text-gray-700 text-sm font-medium uppercase">Home</RouterLink> |
         <RouterLink to="/search" class="text-gray-700 text-sm font-medium uppercase">Search</RouterLink> |
@@ -31,3 +28,88 @@ body {
   @apply container h-full mx-auto my-12;
 }
 </style>
+
+<script setup>
+import { ref } from 'vue'
+import { RouterLink, RouterView } from 'vue-router'
+import { } from "@/components/SearchBar.vue"
+import { createApp } from 'vue'
+
+var searchterm='';
+const proxyurl='http://localhost:8080/';
+var searchEngines= ref([
+        { id: "entscheidsuche", name: "Entscheidsuche", defaultCheckedState: true, checked: true, hitlist: [], hits: 0 },
+        { id: "swisscovery", name: "Swisscovery", defaultCheckedState: true, checked: true, hitlist: [], hits: 0 },
+        { id: "zora", name: "Zora", defaultCheckedState: true, checked: true, hitlist: [],  hits: 0 },
+        { id: "boris", name: "Boris", defaultCheckedState: true, checked: true, hitlist: [],  hits: 0 }
+      ]);
+
+const app=createApp({})
+
+function onQueryChange (query) {
+      this.searchterm = query;
+    }
+    
+function process_hits(data,se){
+	// Sending and receiving data in JSON format using POST method
+	//
+	  var xhr = new XMLHttpRequest();
+	  var url = proxyurl;
+	  xhr.open("POST", url, true);
+	  xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+      // window.alert("Sende Suchanfrage für "+se.id+" mit Data:\n" + data);
+	  xhr.send(data);
+	  xhr.onreadystatechange = function () {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+    	  // window.alert("process_hits: "+xhr.responseText);
+    	  var result=JSON.parse(xhr.responseText)
+    	  se.hits=result.hits;
+          //window.alert("Antwort für "+se.id+": " + result.hits);    	  
+    	  //this.searchEngines_result.result=result;
+          //document.getElementById("tab-content-"+se.id).title="XY";
+		}
+      }
+    }
+
+function process_hitlists(data,se){
+	// Sending and receiving data in JSON format using POST method
+	//
+	  var xhr = new XMLHttpRequest();
+	  var url = proxyurl;
+	  xhr.open("POST", url, true);
+	  xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+      // window.alert("Sende Suchanfrage für "+se.id+" mit Data:\n" + data);
+	  xhr.send(data);
+	  xhr.onreadystatechange = function () {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+    	  // window.alert("process_hit: "+xhr.responseText);
+    	  var result=JSON.parse(xhr.responseText)
+    	  se.hitlist=result.hitlist;  	  
+    	  //this.searchEngines_result.result=result;
+          //document.getElementById("tab-content-"+se.id).title="XY";
+		}
+      }
+    }
+    
+function onSearch (sb) {
+      if (sb !== '') {
+        for (const s of searchEngines.value){
+          if(document.getElementById(s.id).checked){
+    		// window.alert("Suchanfrage mit "+this.searchterm+" an "+s.id);
+            var data=JSON.stringify({"type": "search", "term": sb, "engine": s.id});
+            process_hits(data,s);
+            var data=JSON.stringify({"type": "hitlist", "term": sb, "engine": s.id});
+            process_hitlists(data,s);
+            s.checked=true;
+    	  }
+    	  else {
+    	    s.checked=false;
+    	  }
+        }
+        //window.alert(this.searchterm);
+        //SearchModule.SetQuery(this.searchterm)
+      }
+    }
+
+</script>
+

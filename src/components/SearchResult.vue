@@ -3,9 +3,12 @@ export default {
     name: "SearchResult",
     props: {
         "description": Array,
-        "url": String,
+        "url": String
     }
 }
+
+import { ref } from 'vue'
+
 </script>
 
 <template>
