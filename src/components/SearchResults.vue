@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onUpdated } from 'vue'
+import { ref, onUpdated, onMounted } from 'vue'
 
 var props=defineProps({
 	id: { type: String},
@@ -9,9 +9,26 @@ var props=defineProps({
 const emit=defineEmits(['setObserver']);
 
 onUpdated(() => {
-	emit("setObserver",props.id);
-	// console.log("SetObserver von SearchResults", props.id);
+	if(props.results.length>9){
+		console.log(props.id+"-"+(props.results.length-2).toString()+" (senden-u)");
+		emit("setObserver",props.id);
+	}
+	else{
+		console.log(props.id+" (updated noch ohne Daten)");
+	}
 });
+
+onMounted(() => {
+	if(props.results.length>9){
+		console.log(props.id+"-"+(props.results.length-2).toString()+" (senden-u)");
+		emit("setObserver",props.id);
+	}
+	else{
+		console.log(props.id+" (mounted noch ohne Daten)");
+	}
+});
+
+
 
 
 </script>

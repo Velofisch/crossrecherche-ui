@@ -37,7 +37,7 @@ function setObserver(id) {
 	// console.log("empfange", id);
 	props.searchEngines.filter(function(u) { return u.id==id}).forEach(function(s){
 		if (s.observer && s.hitlist.length<s.hits && document.getElementById(s.id+"-"+(s.hitlist.length-2).toString())){
-			// console.log("Sende set Observer", s.id);
+			console.log(s.id+"-"+(s.hitlist.length-2).toString()+" (weiterleiten)");
 			emit("setObserver", document.getElementById(s.id+"-"+(s.hitlist.length-2).toString()), s, s.hitlist.length);
 		}
 	})

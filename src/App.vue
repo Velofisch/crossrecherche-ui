@@ -160,7 +160,7 @@ function onSearch (sb) {
     }
 
 function setObserver(element,se,len) {
-	console.log(se.id,len);
+	console.log(element.id+" (empfangen)");
 	se.observer.observe(element,se.id);
 }
 
