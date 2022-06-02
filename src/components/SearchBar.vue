@@ -37,7 +37,7 @@ export default {
   },
   setup(props, context){
   	const onSuche = (event) => {
-    	context.emit("clicked", document.getElementById("searchterm").value);
+    	context.emit("onSearch", props.searchterm);
   	}
   	return {
   		onSuche

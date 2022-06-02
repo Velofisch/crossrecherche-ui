@@ -1,15 +1,15 @@
 
 <template>
-  <div class="h-full flex flex-col justify-between border-2 border-gray-500 bg-white">
-    <header class="bg-gray-100 p-16 flex items-start space-x-16 grow-0 text-gray-600">
+  <div class="flex flex-col justify-between border-2 border-gray-500 bg-white">
+    <header class="bg-gray-100 p-8 flex items-start space-x-16 grow-0 text-gray-600">
       <RouterLink to="/"><img alt="Sci-Gate Logo" class="logo" src="@/assets/logo.svg" width="180" height="100" /></RouterLink>
-      <SearchBar :searchterm="searchterm" :searchEngines="searchEngines" @clicked="onSearch"></SearchBar>
+      <SearchBar :searchterm="searchterm" :searchEngines="searchEngines" @onSearch="onSearch"></SearchBar>
     </header>
 
     <main class="grow">
-      <RouterView :searchterm="searchterm" :searchEngines="searchEngines"></RouterView>
+      <RouterView :searchterm="searchterm" :searchEngines="searchEngines" @setObserver="setObserver"></RouterView>
     </main>
-    <footer class="bg-gray-100 p-16 grow-0 flex flex-row justify-between">
+    <footer class="bg-gray-100 p-4 grow-0 flex flex-row justify-between">
       <span class="text-gray-700 text-sm font-medium uppercase">A running prototype</span>
       <div>
         <RouterLink to="/" class="text-gray-700 text-sm font-medium uppercase">Home</RouterLink> |
@@ -50,17 +50,16 @@ const app = createApp({
 // app.use(i18n);
 
 
-var searchterm='';
+var searchterm=ref('');
 const proxyurl='http://v2202109132150164038.luckysrv.de:8080/';
+// const proxyurl='http://localhost:8080';
 
 var searchEngines= ref([
-        { id: "entscheidsuche", name: "Entscheidsuche", defaultCheckedState: true, checked: true, hitlist: [], hits: 0 },
-        { id: "swisscovery", name: "Swisscovery", defaultCheckedState: true, checked: true, hitlist: [], hits: 0 },
-        { id: "zora", name: "Zora", defaultCheckedState: true, checked: true, hitlist: [],  hits: 0 },
-        { id: "boris", name: "Boris", defaultCheckedState: true, checked: true, hitlist: [],  hits: 0 }
+        { id: "entscheidsuche", name: "Entscheidsuche", defaultCheckedState: true, checked: true, hitlist: [], hits: -1, hitsLoaded: 0, searchterm: '',observer: null},
+        { id: "swisscovery", name: "Swisscovery", defaultCheckedState: true, checked: true, hitlist: [], hits: -1, hitsLoaded: 0, searchterm: '', observer: null},
+        { id: "zora", name: "Zora", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0 , searchterm: '', observer: null},
+        { id: "boris", name: "Boris", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }
       ]);
-
-
     
 function process_hits(data,se){
 	// Sending and receiving data in JSON format using POST method
@@ -74,7 +73,7 @@ function process_hits(data,se){
 	  xhr.onreadystatechange = function () {
     	if (xhr.readyState === 4 && xhr.status === 200) {
     	  // window.alert("process_hits: "+xhr.responseText);
-    	  var result=JSON.parse(xhr.responseText)
+    	  var result=JSON.parse(xhr.responseText);
     	  se.hits=result.hits;
           //window.alert("Antwort für "+se.id+": " + result.hits);    	  
     	  //this.searchEngines_result.result=result;
@@ -82,6 +81,7 @@ function process_hits(data,se){
 		}
       }
     }
+
 
 function process_hitlists(data,se){
 	// Sending and receiving data in JSON format using POST method
@@ -96,23 +96,58 @@ function process_hitlists(data,se){
     	if (xhr.readyState === 4 && xhr.status === 200) {
     	  // window.alert("process_hit: "+xhr.responseText);
     	  var result=JSON.parse(xhr.responseText)
-    	  se.hitlist=result.hitlist;  	  
+    	  if(result.start==0){
+	    	  se.hitlist=result.hitlist;  
+    	  }
+    	  else{
+    	  	result.hitlist.forEach(x => se.hitlist.push(x));
+    	  	se.observer.unobserve(document.getElementById(se.id+"-"+(parseInt(result.start)-2).toString()));
+    	  }
+    	  se.hitsLoaded=se.hitlist.length+result.start;
+    	  se.searchterm=result.searchterm;
+    	  if(!se.observer){
+    	  	let observer = new IntersectionObserver((changes,observer) => {
+				if(changes[0].isIntersecting){
+					const name=changes[0].target.id;
+					const names=name.split('-',2);
+					const id=names[0];
+					const start=parseInt(names[1])+2;
+					const sea=searchEngines.value.filter(function(u) { return u.id==id;});
+					if (sea.length==1){
+						const data=JSON.stringify({"type": "hitlist", "term": sea[0].searchterm, "engine": id, "start": start.toString()});
+						console.log("hitliste",data)
+						process_hitlists(data,sea[0]);
+					}
+					else{
+						console.error(name,"nicht zerlegbar!")
+					}
+					
+				}
+			});
+			se.observer=observer;
+    	  }
+    	  // window.alert("searchtterm set "+result.searchterm);
     	  //this.searchEngines_result.result=result;
           //document.getElementById("tab-content-"+se.id).title="XY";
 		}
       }
     }
+
     
 function onSearch (sb) {
       router.push({ path: '/search' });
       if (sb !== '') {
-        for (const s of searchEngines.value){
+        for (var s of searchEngines.value){
+          // window.alert("old searchterm for "+s.id+": '"+s.searchterm+"' new searchterm: '"+sb+"'");
+          // window.alert(document.getElementById(s.id).checked && s.searchterm!=sb);
           if(document.getElementById(s.id).checked){
+          	if(s.searchterm!=sb){
+              const data1=JSON.stringify({"type": "search", "term": sb, "engine": s.id});
+              process_hits(data1,s);
+              const data2=JSON.stringify({"type": "hitlist", "term": sb, "engine": s.id});
+              process_hitlists(data2,s);
+          	}
     		// window.alert("Suchanfrage mit "+this.searchterm+" an "+s.id);
-            var data=JSON.stringify({"type": "search", "term": sb, "engine": s.id});
-            process_hits(data,s);
-            var data=JSON.stringify({"type": "hitlist", "term": sb, "engine": s.id});
-            process_hitlists(data,s);
             s.checked=true;
     	  }
     	  else {
@@ -123,6 +158,12 @@ function onSearch (sb) {
         //SearchModule.SetQuery(this.searchterm)
       }
     }
+
+function setObserver(element,se,len) {
+	console.log(se.id,len);
+	se.observer.observe(element,se.id);
+}
+
 
 </script>
 
