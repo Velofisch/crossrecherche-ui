@@ -1,23 +1,26 @@
 
 <template>
-  <div class="flex flex-col justify-between border-2 border-gray-500 bg-white">
-    <header class="bg-gray-100 p-8 flex items-start space-x-16 grow-0 text-gray-600">
-      <RouterLink to="/"><img alt="Sci-Gate Logo" class="logo" src="@/assets/logo.svg" width="180" height="100" /></RouterLink>
-      <SearchBar :searchterm="searchterm" :searchEngines="searchEngines" @onSearch="onSearch"></SearchBar>
-    </header>
+	<div class="flex flex-col justify-between border-2 border-gray-500 bg-white">
+		<div class="fixed bottom-2 sm:bottom-4 right-2 sm:right-4 bg-gray-100 rounded-full p-4 shadow-md opacity-50 hover:opacity-100 z-50">
+			<a href="#" class="hover:underline text-sm" title="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 inline" width="192" height="192" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line x1="128" y1="224" x2="128" y2="72" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><polyline points="56 144 128 72 200 144" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline><line x1="40" y1="40" x2="216" y2="40" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line></svg></a>
+		</div>
+		<header class="bg-gray-100 p-2 sm:p-8 sticky top-0 flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-16 grow-0 text-gray-600">
+			<RouterLink to="/"><img alt="Sci-Gate Logo" class="logo w-auto h-12 sm:h-16" src="@/assets/logo.svg" width="160" height="77" /></RouterLink>
+			<SearchBar :searchterm="searchterm" :searchEngines="searchEngines" @onSearch="onSearch"></SearchBar>
+		</header>
 
-    <main class="grow">
-      <RouterView :searchterm="searchterm" :searchEngines="searchEngines" @setObserver="setObserver"></RouterView>
-    </main>
-    <footer class="bg-gray-100 p-4 grow-0 flex flex-row justify-between">
-      <span class="text-gray-700 text-sm font-medium uppercase">A running prototype</span>
-      <div>
-        <RouterLink to="/" class="text-gray-700 text-sm font-medium uppercase">Home</RouterLink> |
-        <RouterLink to="/search" class="text-gray-700 text-sm font-medium uppercase">Search</RouterLink> |
-        <RouterLink to="/about" class="text-gray-700 text-sm font-medium uppercase">About</RouterLink>
-      </div>
-    </footer>
-  </div>
+		<main class="grow">
+			<RouterView :searchterm="searchterm" :searchEngines="searchEngines" @setObserver="setObserver"></RouterView>
+		</main>
+		<footer class="bg-gray-100 p-2 sm:p-4 grow-0 sticky bottom-0 flex flex-row justify-between z-20">
+			<span class="text-gray-700 text-sm font-medium uppercase">A running prototype</span>
+			<div class="flex items-center gap-1">
+				<RouterLink to="/" class="text-gray-700 text-sm font-medium uppercase">Home</RouterLink> |
+				<RouterLink to="/search" class="text-gray-700 text-sm font-medium uppercase">Search</RouterLink> |
+				<RouterLink to="/about" class="text-gray-700 text-sm font-medium uppercase">About</RouterLink>
+			</div>
+		</footer>
+	</div>
 </template>
 
 <style>
@@ -25,7 +28,7 @@ body {
   @apply bg-gray-300 min-h-screen;
 }
 #app {
-  @apply container h-full mx-auto my-12;
+  @apply container h-full mx-auto sm:mt-12;
 }
 </style>
 
