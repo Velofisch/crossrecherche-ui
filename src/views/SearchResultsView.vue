@@ -47,25 +47,31 @@ function setObserver(id) {
 
 
 <template>
-    <div class="tabs grid grid-rows-1 grid-flow-col">
-        <div @click="selectTab(searchEngine.id)" v-for="searchEngine in searchEngines.filter(function(u) { return u.checked})" :key="'tab-' + searchEngine.id" :class="['tab', {'active': selectedTab === searchEngine.id}]">
-            <a v-if="searchEngine.hits>=0" class="text-white text-base font-medium uppercase hover:cursor-pointer">{{ searchEngine.name }} ({{ searchEngine.hits}})</a>
-            <a v-else class="text-white text-base font-medium uppercase hover:cursor-pointer">{{ searchEngine.name }}</a>
+    <div class="tabs grid sm:grid-flow-col-dense overflow-x-auto">
+        <div @click="selectTab(searchEngine.id)" v-for="searchEngine in searchEngines.filter(function(u) { return u.checked})" :key="'tab-' + searchEngine.id" :class="['tab', 'cursor-pointer', {'active': selectedTab === searchEngine.id}]">
+            <a v-if="searchEngine.hits>=0" class="text-white text-sm font-medium uppercase hover:cursor-pointer">{{ searchEngine.name }} ({{ searchEngine.hits}})</a>
+            <a v-else class="text-white text-base font-medium uppercase hover:cursor-pointer">
+                {{ searchEngine.name }}
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </a>
         </div>
     </div>
-    <div class="overflow-scroll p-8">
+    <div class="overflow-scroll p-2 sm:p-8">
         <TabContent v-for="searchEngine in searchEngines.filter(function(u) { return u.checked})" :key="'tab-content-' + searchEngine.id" :selected="selectedTab === searchEngine.id" :class="[{'active': selectedTab === searchEngine.id}]">
             <SearchResults v-if="searchEngine.hits>0" :id="searchEngine.id" :results="searchEngine.hitlist" @setObserver="setObserver"></SearchResults>
-            <SearchResults v-else :id="searchEngine.id" :results="[]" @setObserver="setObserver"></SearchResults>            
+            <SearchResults v-else :id="searchEngine.id" :results="[]" @setObserver="setObserver"></SearchResults>
         </TabContent>
     </div>
 </template>
 
 <style scoped>
     .tab {
-        @apply border border-gray-700 py-2 px-4 bg-gray-500 hover:bg-gray-600;
+        @apply border border-gray-700 p-1 sm:p-2 bg-gray-500 hover:bg-gray-600;
     }
     .tab.active {
-        @apply border border-gray-700 py-2 px-4 bg-gray-600;
+        @apply bg-gray-600;
     }
 </style>
