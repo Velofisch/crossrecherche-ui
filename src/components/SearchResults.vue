@@ -35,7 +35,6 @@ onMounted(() => {
 
 <template>
     <div class="grid grid-cols-[minmax(1em,5%)_auto] gap-4">
-        <h2 class="col-start-2 col-span-1 text-2xl font-medium">{{ ("Trefferliste")}}</h2>
         <SearchResult v-for="(result, index) in results" :key="id + index" :id="id + '-' +index" class="search-results-counter-reset my-2 sm:my-4" :resultNumber="index + 1" :description="result.description" :url="result.url"></SearchResult>
     </div>
 </template>
