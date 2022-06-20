@@ -50,7 +50,7 @@ function setObserver(id) {
     <div class="tabs grid sm:grid-flow-col-dense overflow-x-auto">
         <div @click="selectTab(searchEngine.id)" v-for="searchEngine in searchEngines.filter(function(u) { return u.checked})" :key="'tab-' + searchEngine.id" :class="['tab', 'cursor-pointer', {'active': selectedTab === searchEngine.id}]">
             <a v-if="searchEngine.hits>=0" class="text-white text-sm font-medium uppercase hover:cursor-pointer">{{ searchEngine.name }} ({{ searchEngine.hits}})</a>
-            <a v-else class="text-white text-base font-medium uppercase hover:cursor-pointer">
+            <a v-else class="text-white text-sm font-medium uppercase hover:cursor-pointer">
                 {{ searchEngine.name }}
                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
