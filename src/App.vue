@@ -145,6 +145,8 @@ function onSearch (sb) {
           // window.alert(document.getElementById(s.id).checked && s.searchterm!=sb);
           if(document.getElementById(s.id).checked){
           	if(s.searchterm!=sb){
+              s.hits = undefined;
+              s.hitlist = Array();
               const data1=JSON.stringify({"type": "search", "term": sb, "engine": s.id});
               process_hits(data1,s);
               const data2=JSON.stringify({"type": "hitlist", "term": sb, "engine": s.id});

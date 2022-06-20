@@ -49,13 +49,19 @@ function setObserver(id) {
 <template>
     <div class="tabs grid sm:grid-flow-col-dense overflow-x-auto">
         <div @click="selectTab(searchEngine.id)" v-for="searchEngine in searchEngines.filter(function(u) { return u.checked})" :key="'tab-' + searchEngine.id" :class="['tab', 'cursor-pointer', {'active': selectedTab === searchEngine.id}]">
-            <a v-if="searchEngine.hits>=0" class="text-white text-sm font-medium uppercase hover:cursor-pointer">{{ searchEngine.name }} ({{ searchEngine.hits}})</a>
-            <a v-else class="text-white text-sm font-medium uppercase hover:cursor-pointer">
+            <a class="text-white text-sm font-medium uppercase hover:cursor-pointer">
                 {{ searchEngine.name }}
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
+                <template v-if="searchEngine.hits>=0">
+                    ({{ searchEngine.hits}})
+                </template>
+                <template v-else>
+                    <template v-if="searchEngine.searchterm != ''">
+                        <svg class="animate-spin mx-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </template>
+                </template>
             </a>
         </div>
     </div>
