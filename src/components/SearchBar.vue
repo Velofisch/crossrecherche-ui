@@ -10,7 +10,7 @@
         </div>
         <div>
             <details>
-                <summary>Advanced search</summary>
+                <summary class="hover:cursor-pointer">Advanced search</summary>
                 <fieldset class="flex w-full gap-4 sm:gap-8 pt-3">
                     <div>
                         <legend class="mb-4 text-gray-700 text-sm font-medium uppercase whitespace-nowrap">Search in:</legend>
