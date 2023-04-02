@@ -16,8 +16,9 @@
 			<span class="text-gray-700 text-sm font-medium uppercase">A running prototype</span>
 			<div class="flex items-center gap-1">
 				<RouterLink to="/" class="text-gray-700 text-sm font-medium uppercase">Home</RouterLink> |
-				<RouterLink to="/search" class="text-gray-700 text-sm font-medium uppercase">Search</RouterLink> |
-				<RouterLink to="/about" class="text-gray-700 text-sm font-medium uppercase">About</RouterLink>
+				<RouterLink to="/about" class="text-gray-700 text-sm font-medium uppercase">About</RouterLink> |
+				<a href="apidocs" class="text-gray-700 text-sm font-medium uppercase">APIdocs</a>				
+				<a href="apiui" class="text-gray-700 text-sm font-medium uppercase">API</a>				
 			</div>
 		</footer>
 	</div>
