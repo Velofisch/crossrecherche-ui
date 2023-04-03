@@ -55,7 +55,7 @@ const app = createApp({
 
 
 var searchterm=ref('');
-const proxyurl='http://v2202109132150164038.luckysrv.de:8080/';
+const proxyurl='http://v2202109132150164038.luckysrv.de/stubs/';
 // const proxyurl='http://localhost:8080';
 
 var searchEngines= ref([
