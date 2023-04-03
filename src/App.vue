@@ -18,7 +18,7 @@
 				<RouterLink to="/" class="text-gray-700 text-sm font-medium uppercase">Home</RouterLink> |
 				<RouterLink to="/about" class="text-gray-700 text-sm font-medium uppercase">About</RouterLink> |
 				<a href="apidocs" class="text-gray-700 text-sm font-medium uppercase">APIdocs</a> |		
-				<a href="apiui" class="text-gray-700 text-sm font-medium uppercase">API</a>				
+				<a href="api/ui" class="text-gray-700 text-sm font-medium uppercase">API</a>				
 			</div>
 		</footer>
 	</div>

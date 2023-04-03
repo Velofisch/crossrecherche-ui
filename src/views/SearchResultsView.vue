@@ -3,7 +3,7 @@ import { ref, onBeforeUpdate, onUpdated } from 'vue'
 
 var props=defineProps({
 	searchterm: { type: String},
-	searchEngines: { type: Array},
+	searchEngines: { type: Array}
 })
 
 var selectedTab = ref('entscheidsuche');
@@ -43,6 +43,19 @@ function setObserver(id) {
 	})
 
 }
+
+function getDownloadLink(se) {
+	var url='http://v2202109132150164038.luckysrv.de/api/search?{"collection":"'+se.id+'", "query":"'+se.searchterm+'", "getDocs":';
+	if (se.id=='entscheidsuche'){
+		url+='true,"getZIP":true';
+	}
+	else {
+		url+='false,"getZIP":false';
+	}
+	url+=', "getCSV":false, "getHTML":true, "getNiceHTML":false, "getJSON":false, "ui":true}';
+	return url;
+}
+
 </script>
 
 
@@ -52,7 +65,7 @@ function setObserver(id) {
             <a class="text-white text-sm font-medium uppercase hover:cursor-pointer">
                 {{ searchEngine.name }}
                 <template v-if="searchEngine.hits>=0">
-                    ({{ searchEngine.hits}})
+                    ({{ searchEngine.hits}}) <a v-bind:href="getDownloadLink(searchEngine)" target='_blank'>⬇</a> 
                 </template>
                 <template v-else>
                     <template v-if="searchEngine.searchterm != ''">
