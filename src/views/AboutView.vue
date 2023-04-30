@@ -13,18 +13,3 @@
     <p class="inline-block py-3">Wie aber werden dann etwa die Suchergebnisse dargestellt? Kann man diese so heterogenen Suchergebnisse in einer Liste zusammenführen? Inwieweit müssen wir die Daten der einzelnen Datenquellen homogenisieren, um sie dann auch homogen abrufen zu können? Wie gehen wir mit Dubletten um? Wie gewichtet man die Ergebnisse? Legt man die Gewichtung offen? Soll man dann gar zwischen verschiedensten offenen Gewichtungen und Suchalgorhythmen wählen können? Hilft eine graphische Aufarbeitung der Suchergebnisse? Und wie steht man zur Künstlichen Intelligenz, als Abbild dieses so bereits geschaffenen Wissens und als vielleicht Motor künftiger Wissenschaft? Eine Lösung für alles auf einmal wird man kaum finden. Aber auf zweimal, dreimal, Stück für Stück und modular. Vielleicht.</p>
   </div>
 </template>
-
- 
-
- 
-
-
-
-
-
-
-
-
-
-
-
