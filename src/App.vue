@@ -4,6 +4,14 @@
 		<div class="flex flex-col w-1/5 bg-white pt-9 top-0 sticky h-screen">
 			<RouterLink to="/" class="mx-auto mb-10"><img alt="Sci-Gate Logo" class="logo w-auto h-12 sm:h-16" src="@/assets/logo.svg" width="160" height="77" /></RouterLink>
 			<div class="overflow-y-auto">
+				<div @click="selectTab('gesamt')" :key="'tab25'" :class="['tab', 'cursor-pointer', 'font-medium', {'active font-bold': selectedTab === 'gesamt'}]">
+					<a class="text-sm uppercase hover:cursor-pointer py-4 px-6 hover:bg-gray-50 flex justify-between">
+						Gesamt
+						<template v-if="hitsGesamt>=0">
+							({{ hitsGesamt  }})
+						</template>
+					</a>
+				</div>
 				<div @click="selectTab(searchEngine.id)" v-for="searchEngine in searchEngines.filter(function(u) { return u.checked})" :key="'tab-' + searchEngine.id" :class="['tab', 'cursor-pointer', 'font-medium', {'active font-bold': selectedTab === searchEngine.id}]">
 					<a class="text-sm uppercase hover:cursor-pointer py-4 px-6 hover:bg-gray-50 flex justify-between">
 						{{ searchEngine.name }}
@@ -22,7 +30,7 @@
 							</template>
 						</template>
 					</a>
-        </div>
+				</div>
 			</div>
 			<div class="mt-auto mx-auto text-center pb-5 pt-9">
 				<span class="text-gray-700 text-sm font-medium uppercase">A running prototype</span>
@@ -76,7 +84,7 @@ const app = createApp({
 
 // app.use(i18n);
 
-var selectedTab = ref('entscheidsuche');
+var selectedTab = ref('gesamt');
 
 function selectTab(searchEngineId) {
 	console.log(searchEngineId);
@@ -96,6 +104,7 @@ var searchEngines= ref([
         { id: "repositorium", name: "Repositorium", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
         { id: "swisslexGreen", name: "Lexcampus Green", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }
       ]);
+	var hitsGesamt = ref(0);
     
 function process_hits(data,se){
 	// Sending and receiving data in JSON format using POST method
@@ -110,6 +119,7 @@ function process_hits(data,se){
 			// window.alert("process_hits: "+xhr.responseText);
 			var result=JSON.parse(xhr.responseText);
 			se.hits=result.hits;
+			hitsGesamt.value += result.hits;
 			//window.alert("Antwort für "+se.id+": " + result.hits);    	  
 			//this.searchEngines_result.result=result;
 			//document.getElementById("tab-content-"+se.id).title="XY";
@@ -169,6 +179,7 @@ function process_hitlists(data,se){
 
     
 function onSearch (sb) {
+	hitsGesamt.value = 0;
 	router.push({ path: '/search' });
 	if (sb !== '') {
 		for (var s of searchEngines.value){

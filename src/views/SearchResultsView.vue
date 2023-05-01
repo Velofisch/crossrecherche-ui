@@ -39,6 +39,33 @@ function setObserver(id) {
 
 }
 
+function getFulllist(se) {
+    let maxIndex = 0;
+    console.log("rendering");
+    se.forEach(s => {
+        if(s.hitlist.length > maxIndex) {
+            console.log("max", s.hitlist.length);
+            maxIndex = s.hitlist.length * 1
+        }
+    });
+    if(maxIndex === 0) {
+        console.log("max return");
+        return []
+    }
+    let hitlist = [];
+    for(var i=0;i<maxIndex; i++) {
+        se.forEach(s => {
+        console.log("type", typeof(s.hitlist));
+        if(i < s.hitlist.length) {
+            console.log("hl", s.hitlist, typeof s.hitlist[i]);
+            hitlist.push(s.hitlist[i]);
+            console.log("hl", hitlist);
+        }
+    });
+    }
+    return hitlist;
+}
+
 </script>
 
 
@@ -57,6 +84,9 @@ function setObserver(id) {
                 </svg>
                 <span class="text-sm">Loading more results...</span>
             </div>
+        </TabContent>
+        <TabContent :key="'tab-gesamt'" :selected="selectedTab === 'gesamt'" :class="[{'active': selectedTab === 'gesamt'}]">
+            <SearchResults id="se-gesamt" :results="getFulllist(searchEngines)"></SearchResults>
         </TabContent>
     </div>
 </template>
