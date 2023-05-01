@@ -14,8 +14,8 @@ import { ref } from 'vue'
 </script>
 
 <template>
-    <p :id="id" class="font-light mr-2 mt-1 pt-1 text-right">{{ resultNumber }}.</p>
-    <div class="p-1 hover:bg-gray-100">
+    <!-- <p :id="id" class="font-light mr-2 mt-1 pt-1 text-right">{{ resultNumber }}.</p> -->
+    <div class="p-5 rounded-lg shadow bg-white">
         <h3 class="text-lg font-medium hover:text-gray-800">
             <a :href="url" target="_blank" class="hover:underline">
                 <span v-html="description[0]"></span>

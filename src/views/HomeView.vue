@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="p-16">
-    <p>Welcome to SciGate.</p>
+  <div class="mt-auto">
+    <img alt="Sci-Gate Logo" class="opacity-5 my-10" src="@/assets/logo.svg" />
   </div>
 </template>
