@@ -7,7 +7,7 @@
 				<div @click="selectTab('gesamt')" :key="'tab25'" :class="['tab', 'cursor-pointer', 'font-medium', {'active font-bold': selectedTab === 'gesamt'}]">
 					<a class="text-sm uppercase hover:cursor-pointer py-4 px-6 hover:bg-gray-50 flex justify-between">
 						Gesamt
-						<template v-if="hitsGesamt>=0">
+						<template v-if="hitsGesamt>0">
 							({{ hitsGesamt  }})
 						</template>
 					</a>
@@ -34,9 +34,11 @@
 			</div>
 			<div class="mt-auto mx-auto text-center pb-5 pt-9">
 				<span class="text-gray-700 text-sm font-medium uppercase">A running prototype</span>
-				<div class="flex items-center gap-1">
+				<div class="flex flex-wrap text-center items-center justify-center gap-1 mt-3">
 					<RouterLink to="/" class="text-gray-700 text-sm font-medium uppercase hover:underline">Home</RouterLink> |
 					<RouterLink to="/about" class="text-gray-700 text-sm font-medium uppercase hover:underline">About</RouterLink> |
+					<RouterLink to="/impressum" class="text-gray-700 text-sm font-medium uppercase hover:underline">Impressum</RouterLink>
+					<br>
 					<a href="apidocs" class="text-gray-700 text-sm font-medium uppercase hover:underline">APIdocs</a> |		
 					<a href="api/ui" class="text-gray-700 text-sm font-medium uppercase hover:underline">API</a>				
 				</div>
