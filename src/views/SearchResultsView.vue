@@ -48,7 +48,7 @@ function setObserver(id) {
             <SearchResults v-if="searchEngine.hits>0" :id="searchEngine.id" :results="searchEngine.hitlist" @setObserver="setObserver"></SearchResults>
             <SearchResults v-else :id="searchEngine.id" :results="[]" @setObserver="setObserver"></SearchResults>
             <div v-if="searchEngine.hits === 0">
-                <p>There is no result for the search term <span class="font-semibold">{{ searchEngine.searchterm }}</span> in this search engine.</p>
+                <p>There is no result for the search term <span class="font-semibold">{{ searchEngine.searchterm }}</span> in the search engine {{ searchEngine.name }}.</p>
             </div>
             <div v-else-if="searchEngine.hits > searchEngine.hitsLoaded" class="flex flex-col items-center">
                 <svg class="animate-spin p-4 h-20 w-20 text-gray-600 text-center" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
