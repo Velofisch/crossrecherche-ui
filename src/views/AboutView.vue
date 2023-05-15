@@ -1,6 +1,6 @@
 <template>
   <div class="p-16">
-    <h1 class="font-bold text-xl mb-5">Scigate ist ein Showcase und One-Stop-Shop für (Rechts-)Daten. Zurzeit handelt es sich bei scigate um einen frühen Prototyp</h1>
+    <p class="inline-block py-3">Scigate ist ein Showcase und One-Stop-Shop für (Rechts-)Daten. Zurzeit handelt es sich bei scigate um einen frühen Prototyp</p>
     <h2 class="font-bold text-lg">I. Datenhunger</h2>
     <p class="inline-block py-3">Künstliche Intelligenz braucht Daten, natürliche Intelligenz auch. Gateway zu diesen Daten im weitesten Sinne war früher, nicht zuletzt wenn es um die Wissenschaft ging, vor allem die Bibliothek. Gatekeeper zu diesen Daten waren die Bibliothekarinnen und Bibliothekare, welche die Texte, die Daten mit Metadaten versahen und sie so such- und auffindbar machten.</p>
     <p class="inline-block py-3">Von dieser Bibliothek ist heute wenig geblieben. Wissenschaftsdaten werden heute häufig in Datenbanken verschiedenster Akteure zur Verfügung gestellt, mit unterschiedlichem Zugang und verschiedenster Zugänglichkeit, nicht zuletzt in Hinblick auf die inhaltliche Erschliessung und so auch wiederum Such- und Auffindbarkeit der Daten. Eine bedeutende Rolle nehmen Grossverlage ein, die mit ihren Datenbanken die öffentlichen Bibliotheken als Gatekeeper des Wissens weitestgehend abgelöst haben.</p>
