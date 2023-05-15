@@ -102,8 +102,8 @@ var searchEngines= ref([
         { id: "swisscovery", name: "Swisscovery", defaultCheckedState: true, checked: true, hitlist: [], hits: -1, hitsLoaded: 0, searchterm: '', observer: null},
         { id: "zora", name: "Zora", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0 , searchterm: '', observer: null},
         { id: "boris", name: "Boris", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
-        { id: "fedlex", name: "Fedlex", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
-        { id: "repositorium", name: "Repositorium", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }
+        { id: "fedlex", name: "Fedlex", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }
+        // , { id: "repositorium", name: "Repositorium", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }
         // , { id: "swisslexGreen", name: "Lexcampus Green", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }
       ]);
 	var hitsGesamt = ref(0);
