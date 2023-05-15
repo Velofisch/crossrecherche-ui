@@ -17,6 +17,8 @@
 			<div class="flex items-center gap-1">
 				<RouterLink to="/" class="text-gray-700 text-sm font-medium uppercase">Home</RouterLink> |
 				<RouterLink to="/about" class="text-gray-700 text-sm font-medium uppercase">About</RouterLink> |
+				<RouterLink to="/impressum" class="text-gray-700 text-sm font-medium uppercase">Impressum</RouterLink> |
+				<RouterLink to="/datenschutz" class="text-gray-700 text-sm font-medium uppercase">Datenschutz</RouterLink> |
 				<a href="apidocs" class="text-gray-700 text-sm font-medium uppercase">APIdocs</a> |		
 				<a href="api/ui" class="text-gray-700 text-sm font-medium uppercase">API</a>				
 			</div>
