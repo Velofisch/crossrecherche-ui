@@ -57,16 +57,18 @@ const app = createApp({
 
 
 var searchterm=ref('');
-const proxyurl='http://v2202109132150164038.luckysrv.de/stubs/';
-// const proxyurl='http://localhost:8080';
+//const proxyurl='http://v2202109132150164038.luckysrv.de/stubs/';
+const proxyurl='http://localhost:8080';
 
 var searchEngines= ref([
         { id: "entscheidsuche", name: "Entscheidsuche", defaultCheckedState: true, checked: true, hitlist: [], hits: -1, hitsLoaded: 0, searchterm: '',observer: null},
         { id: "swisscovery", name: "Swisscovery", defaultCheckedState: true, checked: true, hitlist: [], hits: -1, hitsLoaded: 0, searchterm: '', observer: null},
         { id: "zora", name: "Zora", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0 , searchterm: '', observer: null},
         { id: "boris", name: "Boris", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
-        { id: "fedlex", name: "Fedlex", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }
-      //  ,{ id: "repositorium", name: "Repositorium", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }
+        { id: "fedlex", name: "Fedlex", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
+				{ id: "repositorium", name: "Repositorium", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
+				{ id: "legalanthology", name: "Legal Anthology", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
+				{ id: "digitalisierungszentrum", name: "Münchner DigitalisierungsZentrum", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
       //  ,{ id: "swisslexGreen", name: "Lexcampus Green", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }        
       ]);
     
