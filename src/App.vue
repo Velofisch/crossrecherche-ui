@@ -69,6 +69,7 @@ var searchEngines= ref([
 				{ id: "repositorium", name: "Repositorium", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
 				{ id: "legalanthology", name: "Legal Anthology", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
 				{ id: "digitalisierungszentrum", name: "Münchner DigitalisierungsZentrum", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
+				{ id: "gotriple", name: "GoTriple", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null },
       //  ,{ id: "swisslexGreen", name: "Lexcampus Green", defaultCheckedState: true, checked: true, hitlist: [],  hits: -1, hitsLoaded: 0, searchterm: '', observer: null }        
       ]);
     
